@@ -21,7 +21,15 @@ public class MemberService {
   }
 
   public MemberDto getMemberDto(Member member) {
-    return modelMapper.map(member, MemberDto.class);
+    //MemberDto dto = modelMapper.map(member, MemberDto.class);
+    MemberDto memberDto = new MemberDto( member.getMemberKey(),
+        member.getMemberId(),
+        member.getName(),
+        member.getEmail(),
+        member.getAge(),
+        member.getBirthday()
+    );
+    return memberDto;
   }
 
   public Member findByMemberIdOrDefault(String memberId) {

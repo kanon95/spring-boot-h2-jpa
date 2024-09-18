@@ -32,6 +32,14 @@ public class MemberDto implements Serializable {
 
   private LocalDate birthday;
 
+  public void setValue(Long memberKey, String memberId, String name, String email, int age, LocalDate birthday) {
+    this.memberKey = memberKey;
+    this.memberId = memberId;
+    this.name = name;
+    this.email = email;
+    this.age = age;
+    this.birthday = birthday;
+  }
 
   public Member toDomain() {
     return new Member(this.memberKey, this.memberId, this.name, this.email, this.age, this.birthday);
