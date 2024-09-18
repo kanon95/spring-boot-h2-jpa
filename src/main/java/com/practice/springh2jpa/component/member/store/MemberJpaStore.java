@@ -30,7 +30,8 @@ public class MemberJpaStore implements MemberStore {
     List<MemberJpo> memberJpoList =  StreamSupport.stream(memberRepository.findAll().spliterator(), false)
         .filter(memberJpo -> memberJpo.getMemberId().equals(memberId))
         .toList();
-    return Optional.of(memberJpoList.get(0).toDomain());
+
+    return !memberJpoList.isEmpty() ? Optional.of(memberJpoList.get(0).toDomain()) : Optional.empty();
   }
 
   @Override
