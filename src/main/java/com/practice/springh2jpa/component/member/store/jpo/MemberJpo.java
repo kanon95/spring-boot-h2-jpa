@@ -20,7 +20,7 @@ import org.modelmapper.ModelMapper;
 
 @Getter
 @Entity
-@Table
+@Table(name = "T_MEMBER")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Comment("회원")
 public class MemberJpo {
@@ -43,11 +43,11 @@ public class MemberJpo {
   private String email;
 
   @Comment("회원 나이")
-  @Column(nullable = false)
+  @Column(nullable = true)
   private int age;
 
   @Comment("회원 생년월일")
-  @Column(nullable = false)
+  @Column(nullable = true)
   private LocalDate birthday;
 
   public MemberJpo(Member member) {

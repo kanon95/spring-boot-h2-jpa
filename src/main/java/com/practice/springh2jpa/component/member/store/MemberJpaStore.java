@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@RequiredArgsConstructor
 public class MemberJpaStore implements MemberStore {
 
-  private MemberRepository memberRepository;
+  private final MemberRepository memberRepository;
 
   @Override
   public List<Member> findAll() {
