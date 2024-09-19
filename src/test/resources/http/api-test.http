@@ -1,0 +1,43 @@
+### 등록 #1
+POST {{host}}/member
+Content-Type: application/json
+X-Attic-User: sylee
+
+{
+    "memberId": "test1",
+    "name": "테스트1",
+    "email": "test1@site.com",
+    "age": 30
+}
+### 등록 #2
+POST {{host}}/member
+Content-Type: application/json
+X-Attic-User: sylee
+
+{
+"memberId": "test2",
+"name": "테스트2",
+"email": "test2@site.com",
+"age": 32
+}
+
+### 조회
+GET {{host}}/member/test1
+Content-Type: application/json
+
+### 수정
+PUT {{host}}/member
+Content-Type: application/json
+X-Attic-User: sylee
+
+{
+  "memberId": "test1",
+  "name": "테스트1-수정",
+  "email": "test1-modified@site.com",
+  "age": 130
+}
+
+### 삭제
+DELETE {{host}}/member/test1
+Content-Type: application/json
+
