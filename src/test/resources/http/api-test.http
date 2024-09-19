@@ -7,7 +7,8 @@ X-Attic-User: sylee
     "memberId": "test1",
     "name": "테스트1",
     "email": "test1@site.com",
-    "age": 30
+    "age": 31,
+    "birthday": "2024-09-19"
 }
 ### 등록 #2
 POST {{host}}/member
@@ -15,10 +16,12 @@ Content-Type: application/json
 X-Attic-User: sylee
 
 {
-"memberId": "test2",
-"name": "테스트2",
-"email": "test2@site.com",
-"age": 32
+  "memberId": "test2",
+  "name": "테스트2",
+  "email": "test2@site.com",
+  "age": 32,
+  "birthday": "2024-09-19"
+
 }
 
 ### 조회
@@ -34,7 +37,8 @@ X-Attic-User: sylee
   "memberId": "test1",
   "name": "테스트1-수정",
   "email": "test1-modified@site.com",
-  "age": 130
+  "age": 130,
+  "birthday": "2024-09-19"
 }
 
 ### 삭제
