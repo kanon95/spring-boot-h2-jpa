@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -34,9 +35,20 @@ public class MemberController {
 
   private final MemberService memberService;
 
+  @Operation(
+      summary = "사용자 목록 조회",
+      description = "사용자 목록을 조회 합니다.",
+      responses = {
+          @ApiResponse( responseCode = "200", description = "사용자 조회 성공"),
+          @ApiResponse( responseCode = "404", description = "사용자 조회 실패")
+      }
+  )
+  @Parameters ({
+      @Parameter(name = "name", description = "사용자 이름으로 검색", example = "테스트1")
+  })
   @GetMapping("/list")
   public ResponseEntity<List<MemberDto>> findAllByName(
-      @RequestParam String name
+      @RequestParam(required = false) String name
   ) {
     List<Member> list = memberService.findAllByName(name, 0, 10);
     return ResponseEntity.ok(list.stream().map(MemberDto::from).toList());
