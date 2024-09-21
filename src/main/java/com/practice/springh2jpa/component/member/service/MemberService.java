@@ -3,7 +3,7 @@ package com.practice.springh2jpa.component.member.service;
 import com.practice.springh2jpa.component.member.adapter.dto.MemberDto;
 import com.practice.springh2jpa.component.member.domain.entity.Member;
 import com.practice.springh2jpa.component.member.domain.store.MemberStore;
-import java.util.NoSuchElementException;
+import com.practice.springh2jpa.component.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
@@ -17,37 +17,22 @@ public class MemberService {
 
   public Member findByMemberId(String memberId) {
     return memberStore.findByMemberId(memberId)
-        .orElseThrow(()->new NoSuchElementException("Member with id " + memberId + " not found"));
-  }
-
-  public MemberDto getMemberDto(Member member) {
-    //MemberDto dto = modelMapper.map(member, MemberDto.class);
-    MemberDto memberDto = new MemberDto( member.getMemberKey(),
-        member.getMemberId(),
-        member.getName(),
-        member.getEmail(),
-        member.getAge(),
-        member.getBirthday()
-    );
-    return memberDto;
+        .orElseThrow(()->new MemberNotFoundException("Member with id " + memberId + " not found"));
   }
 
   public Member findByMemberIdOrDefault(String memberId) {
     return  memberStore.findByMemberId(memberId).orElseGet(()-> Member.defaultValue(memberId));
   }
 
-  public String register(MemberDto memberDto) {
-    Member member = memberDto.toDomain();
-    memberStore.save(member);
-    return member.getMemberId();
+  public Member register(MemberDto memberDto) {
+    return memberStore.save(memberDto.toDomain());
   }
 
-  public void modify(MemberDto memberDto) {
-
+  public Member modify(MemberDto memberDto) {
     Member member = this.findByMemberId(memberDto.getMemberId());
     member.setValues(memberDto.getName(), memberDto.getEmail(), memberDto.getAge(),
         memberDto.getBirthday());
-    memberStore.save(member);
+    return memberStore.save(member);
   }
 
   public void remove(String memberId) {

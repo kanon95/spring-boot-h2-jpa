@@ -63,6 +63,7 @@ public class MemberJpo {
     this.birthday = member.getBirthday();
   }
 
+
   public Member toDomain() {
     return new Member(memberKey, memberId, name, email, age, birthday);
   }

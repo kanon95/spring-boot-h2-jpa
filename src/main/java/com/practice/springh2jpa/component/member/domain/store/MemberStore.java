@@ -13,7 +13,7 @@ public interface MemberStore {
 
   Optional<Member> findByMemberId(String memberId);
 
-  void save(Member member);
+  Member save(Member member);
 
   void deleteByMemberKey(Long memberKey);
 

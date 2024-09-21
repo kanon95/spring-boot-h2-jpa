@@ -41,6 +41,17 @@ public class MemberDto implements Serializable {
     this.birthday = birthday;
   }
 
+  public static MemberDto from(Member member) {
+    MemberDto memberDto = new MemberDto( member.getMemberKey(),
+        member.getMemberId(),
+        member.getName(),
+        member.getEmail(),
+        member.getAge(),
+        member.getBirthday()
+    );
+    return memberDto;
+  }
+
   public Member toDomain() {
     return new Member(this.memberKey, this.memberId, this.name, this.email, this.age, this.birthday);
   }

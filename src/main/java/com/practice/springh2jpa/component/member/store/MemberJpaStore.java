@@ -39,8 +39,9 @@ public class MemberJpaStore implements MemberStore {
   }
 
   @Override
-  public void save(Member member) {
-    memberRepository.save(new MemberJpo(member));
+  public Member save(Member member) {
+    MemberJpo jpo = memberRepository.save(new MemberJpo(member));
+    return jpo.toDomain();
   }
 
   @Override
