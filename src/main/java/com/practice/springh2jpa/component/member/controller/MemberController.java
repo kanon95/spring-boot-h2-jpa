@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,9 +34,9 @@ public class MemberController {
 
   private final MemberService memberService;
 
-  @GetMapping("/list/{name}")
+  @GetMapping("/list")
   public ResponseEntity<List<MemberDto>> findAllByName(
-      @PathVariable String name
+      @RequestParam String name
   ) {
     List<Member> list = memberService.findAllByName(name, 0, 10);
     return ResponseEntity.ok(list.stream().map(MemberDto::from).toList());

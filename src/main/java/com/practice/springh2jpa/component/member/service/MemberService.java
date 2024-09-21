@@ -19,7 +19,13 @@ public class MemberService {
 
   public List<Member> findAllByName(String name, int page, int size) {
     PageRequest pageRequest = PageRequest.of(page, size);
-    return memberStore.findAllByName(name,pageRequest);
+    List<Member> list = null;
+    if (name != null) {
+      list = memberStore.findAllByName(name, pageRequest);
+    } else {
+      list = memberStore.findAll();
+    }
+    return list;
   }
 
   public Member findByMemberId(String memberId) {
