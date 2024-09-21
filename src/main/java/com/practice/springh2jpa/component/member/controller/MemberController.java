@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
   private final MemberService memberService;
+
+  @GetMapping("/list/{name}")
+  public ResponseEntity<List<MemberDto>> findAllByName(
+      @PathVariable String name
+  ) {
+    List<Member> list = memberService.findAllByName(name, 0, 10);
+    return ResponseEntity.ok(list.stream().map(MemberDto::from).toList());
+  }
 
   @Operation(
       summary = "사용자 조회",
