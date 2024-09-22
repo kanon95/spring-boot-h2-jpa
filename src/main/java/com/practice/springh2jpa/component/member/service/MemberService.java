@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -42,6 +43,7 @@ public class MemberService {
     return memberStore.save(memberDto.toDomain());
   }
 
+  @Transactional
   public Member modify(MemberDto memberDto) {
     Member member = this.findByMemberId(memberDto.getMemberId());
     member.setValues(memberDto.getName(), memberDto.getEmail(), memberDto.getAge(),
@@ -49,6 +51,7 @@ public class MemberService {
     return memberStore.save(member);
   }
 
+  @Transactional
   public void remove(String memberId) {
     Member member = this.findByMemberId(memberId);
     memberStore.deleteByMemberKey(member.getMemberKey());

@@ -12,6 +12,7 @@ import java.util.stream.StreamSupport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
@@ -67,6 +68,7 @@ public class MemberJpaStore implements MemberStore {
   }
 
   @Override
+  @Transactional
   public void deleteByMemberId(String memberId) {
     this.findByMemberId(memberId)
         .ifPresent(member -> {
